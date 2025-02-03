@@ -1,6 +1,32 @@
+%
+% A code to perform the analysis of the efficiency of different designs of a blended wings glider. 
+% Provided different values of the VBD capacity and different angles of attack during glides, the 
+% code returns the idealised travelled distance as function of the battery capacity. 
+%
+% authors: MEng Blended Wing Team 
+%	   Yuncong Du
+%	   ... 
+%          TODO
+%
+% date: Novemebr 2024
+%
+% Acronym list:
+% NB: Neutral Buoyancy
+%  
+%
+%
+%
+
+
 clc
 clear all
 close all
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	1. Input parameters (can be edited)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %% Input Constents:(Can run this section seperate to update some constents)
 %general
 rho_SW=1027;
@@ -20,8 +46,22 @@ EtaBE=0.35;%BE efficiency
 BatteryE=2000*3600;%total battery cap in Ws
 %4D slicer
 SliceControler=6;%want slice base on which NB index
+folderPath='Put_The_Data_Here/MECHSPACE_XFLR5/';  % path to the XFLR5 folder containing ..... TODO
+
+
+% Postpro params 
+generalYlim=[0,0.2];
+generalXlim=[0,1];
+generalXlim2=[-1,0]; % TODO currently unused 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	2. Data processing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 %% Read Data
-folderPath='Put_The_Data_Here/MECHSPACE_XFLR5/';
 FileList=dir(folderPath);
 FileList=FileList(4:end);
 NumberOfFiles=length(FileList);
@@ -177,11 +217,14 @@ movingDistance=[movingDistance(1:LB-1,:);movingDistance(UB:end,:)];
 movingDperL=[movingDperL(1:LB-1,:);movingDperL(UB:end,:)];
 NBinLforDPLCalc=[NBinLforDPLCalc(1:LB-1,:);NBinLforDPLCalc(UB:end,:)];
 checkAOA0=find(UsefullAOA==0);
-%% Graph stage
-%general change
-generalYlim=[0,0.2];
-generalXlim=[0,1];
-generalXlim2=[-1,0];
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	3. Plotting results
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 F1P2start=0;%Figure1 series part 2 that draw the aoa range starting point adjustment
     end % here to run the process stage
 %% Positive part which is for dive
